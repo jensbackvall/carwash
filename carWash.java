@@ -22,6 +22,52 @@ public class carWash
     {
 
     }
+    
+   public static void buyWash(int user) {
+        try {
+        Scanner console = new Scanner(System.in);
+        Scanner userFile = new Scanner(new File(user + ".txt"));
+        System.out.println("Du kan vælge mellem følgende vasketyper:");
+        System.out.println("1. Economy (pris: " + economy + ").");
+        System.out.println("2. Standard (pris: " + standard + ").");
+        System.out.println("3. DeLuxe (pris: " + deluxe + ").");
+        System.out.println("Vælg venligst en vasketype (skriv 1, 2 eller 3):");
+        int washChoice = console.nextInt();
+        String ub = userFile.nextLine();
+        String up = userFile.nextLine();
+        PrintStream writeBalance = new PrintStream(new File(user + ".txt"));
+        double userBalance = Double.parseDouble(ub);
+        double userPin = Double.parseDouble(up);
+        boolean correctChoice = false;
+        while(correctChoice == false) {
+            if(washChoice == 1) {
+                correctChoice = true;
+                writeBalance.println((int)userBalance - economy);
+                writeBalance.println((int)userPin);
+                System.out.println("Du har valgt og betalt for en Economy vask. " + economy + " kr. bliver trukket fra dit kort.");
+                return;
+            } else if(washChoice == 2) {
+                correctChoice = true;
+                writeBalance.println((int)userBalance - standard);
+                writeBalance.println((int)userPin);
+                System.out.println("Du har valgt og betalt for en Stadard vask. " + standard + " kr. bliver trukket fra dit kort.");
+                return;
+            } else if(washChoice == 3) {
+                correctChoice = true;
+                writeBalance.println((int)userBalance - deluxe);
+                writeBalance.println((int)userPin);
+                System.out.println("Du har valgt og betalt for en DeLuxe vask. " + deluxe + " kr. bliver trukket fra dit kort.");
+                return;
+            } else {
+                System.out.println("Du har ikke valgt en gyldig vask. Tast venligst 1, 2 eller 3!");                    washChoice = console.nextInt();
+            }
+            }
+            }
+            catch(FileNotFoundException e)
+            {
+            e.printStackTrace();
+            }
+    }
    
    public static void changePrices()
    {
