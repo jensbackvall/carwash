@@ -1,0 +1,4 @@
+economy: 200
+standard: 400
+deluxe: 1000
+rabat: 20
