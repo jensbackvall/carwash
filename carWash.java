@@ -23,37 +23,37 @@ public class carWash
 
     }
    
-   public static void ChangePrices()
+   public static void changePrices()
    {
       Scanner sc = new Scanner (System.in);
          
-      System.out.println("indtast nye priser på economy");
+      System.out.println("indtast nye priser pÃ¥ economy");
       economy = sc.nextDouble();
       
-      System.out.println("indtast nye priser på standard");
+      System.out.println("indtast nye priser pÃ¥ standard");
       standard = sc.nextDouble();
       
-      System.out.println("indtast nye priser på deluxe");
+      System.out.println("indtast nye priser pÃ¥ deluxe");
       deluxe = sc.nextDouble();
             
-      System.out.println("Ny pris på economy = " + economy);
-      System.out.println("Ny pris på standard = " + standard);
-      System.out.println("Ny pris på deluxe = " + deluxe);
+      System.out.println("Ny pris pÃ¥ economy = " + economy);
+      System.out.println("Ny pris pÃ¥ standard = " + standard);
+      System.out.println("Ny pris pÃ¥ deluxe = " + deluxe);
       
      
     }
-   public static void ChangeOffer()
+   public static void changeRabat()
    {
       Scanner sc = new Scanner (System.in);
       
       System.out.println("Indtast ny rabat");
-      rabat = sc.nextDouble();
+      rabat = (100. - sc.nextDouble())/100.;
       
       System.out.println("Ny rabat = " + rabat);
       
       
    }
-}
+
 
     
     
