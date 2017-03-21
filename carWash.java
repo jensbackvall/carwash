@@ -42,13 +42,13 @@ public class carWash
             while(correctChoice == false) {
                 if(washChoice == 1) {
                     correctChoice = true;
-                   writeBalance.println((int)userBalance - economy);
+                    writeBalance.println((int)userBalance - economy);
                     writeBalance.println((int)userPin);
                     System.out.println("Du har valgt og betalt for en Economy vask. " + economy + " kr. bliver trukket fra dit kort.");
                     return;
                 } else if(washChoice == 2) {
                     correctChoice = true;
-                   writeBalance.println((int)userBalance - standard);
+                    writeBalance.println((int)userBalance - standard);
                     writeBalance.println((int)userPin);
                     System.out.println("Du har valgt og betalt for en Stadard vask. " + standard + " kr. bliver trukket fra dit kort.");
                     return;
