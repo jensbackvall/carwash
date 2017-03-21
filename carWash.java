@@ -53,6 +53,15 @@ public class carWash
       
       
    }
+     public static void kontooversigt()
+    {
+    
+    System.out.println("Se kontooversigt");
+    System.out.println("Din saldo er: " + saldo + "kr");
+    
+    
+
+    }
 
 
     
@@ -172,42 +181,5 @@ public static void admin()
    }
 }
 
-  public static void refill()
-  {
-      System.out.println("Optankning");
-      System.out.println("Indtast beløb (Mellem 1-10.000)");
-      Scanner console = new Scanner(System.in);
-      double amount = console.nextDouble();
-      System.out.println("***Wash card ejets***");
-      System.out.println();
-      System.out.println("Indsæt kreditkort");
-      
-      System.out.println("***Press enter when credit card has been inserted***");
-      console.nextLine();
-      console.nextLine();
-      System.out.println("Indtast pinkode");
-      int pin = 1234;
-      int enteredPin = console.nextInt();
-      int count = 0;
-      while(enteredPin != pin && count < 2) {
-      System.out.println("Forkert pinkode - Prøv igen");
-      enteredPin = console.nextInt();
-      count++;
-      }
-      if(enteredPin==pin){
-      System.out.println(amount + "kr");
-      System.out.println("Tryk 1 og enter for at godkende");
-      System.out.println("Tryk 2 og enter for at fortryde");
-      }
-      else{
-      System.out.print("Korter er spærret");
-      }
-      int godkendFortryd = console.nextInt();
-      while(godkendFotryd != 1 || godkendFotryd != 2) {
-      
-      }   
-  }
-    
-    
 }
 
