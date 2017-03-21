@@ -253,4 +253,33 @@ public class carWash
 
 
 }
+  public static void receipt() {
+             Scanner in = new Scanner(System.in);
+             int a;
+            int washChoice;
+            double Pris;
+            double Saldo;
+            Date date = new Date();
+            if(washChoice == 1) {
+           float Pris = economy; 
+}else if(washChoice == 2) {
+        float Pris = standard;
+}else if(washChoice == 3) {
+  float Pris = deluxe; 
+}else {
+   System.out.println("Kære soede skat vil du ikke nok vælge en rigtig vask og prøve igen");
+break;
+}
+        System.out.println("Tast 1 for kvittering ellers tast 2.");
+       a = in.nextInt();
+     if(a == 1) {
+   System.out.println("Her faar du din kvittering fortssat god dag");
+     System.out.println(" " + date);
+     System.out.println(" " + Pris);
+        System.out.println("Dette er din tilbageværende saldo " + Saldo)
+        }else {
+   System.out.println("du faar ingen kvittering fortsat god dag");
+     }
+   }     
+} 
 
