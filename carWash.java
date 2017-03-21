@@ -93,6 +93,84 @@ public class carWash
         e.printStackTrace();
        }
     }
+    
+    public static menu(String bruger) 
+{
+    if( bruger.equals("01"))
+    admin();
+    else
+    customer();
+}
+
+
+
+public static void customer()
+{  
+
+   int choice;
+   boolean optionNotAvailable = true;
+   Scanner in = new Scanner(System.in);
+      
+   while (optionNotAvailable == true)
+   {
+      System.out.println("Indtast kategoriens nummer for at vaelge den");
+      System.out.println("1) Vaskemuligheder");
+      System.out.println("2) Optankning");
+      System.out.println("3) Konto oversigt");
+      System.out.println("4) Kvittering");
+      choice = in.nextInt();
+                     
+      switch (choice)
+      {
+         case 1:  optionNotAvailable = false;
+                  admin();
+                  break;
+                     
+         case 2:  optionNotAvailable = false;
+                  System.out.print("Indsæt optanknings method");
+                  break;
+                     
+         case 3:  optionNotAvailable = false;
+                  System.out.print("indsæt konto oversigt method");
+                  break;
+                     
+         case 4:  optionNotAvailable = false;
+                  System.out.print("indsæt kvittering method");
+                  break;
+                    
+         default: System.out.println("Din indtastning er invalid, prøv igen");
+      }
+   }
+}
+
+public static void admin()
+{
+   boolean optionNotAvailable = true;
+   int choice;
+   Scanner in = new Scanner(System.in);
+   
+   while( optionNotAvailable == true )
+   {
+      System.out.println("Indtast kategoriens nummer for at vaelge den");
+      System.out.println("1) aendre priser");
+      System.out.println("2) Se statestik");
+      choice = in.nextInt();
+   
+      switch(choice)
+      {
+         case 1:  optionNotAvailable = false;
+                  System.out.println("Indsæt aendre priser method");
+                  break;
+                  
+         case 2:  optionNotAvailable = false;
+                  System.out.println("Indsæt se statistik method");
+                  break;
+                  
+         default: System.out.println("Din indtastning er invalid, prøv igen");
+                  break;  
+      }
+   }
+}
 
 }
 
