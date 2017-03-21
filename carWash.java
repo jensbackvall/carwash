@@ -55,7 +55,14 @@ public class carWash
    }
 
 
+     public static void kontooversigt()
+    {
     
+    System.out.println("Se kontooversigt");
+    System.out.println("Din saldo er: " + saldo + "kr");
+
+    }
+
     
     public static void ReadPrice()
     {
