@@ -2,21 +2,13 @@ import java.util.*;
 import java.io.*;
 
 public class carWash {
-
-<<<<<<< HEAD
-    public static double economy = 0;
-    public static double standard = 0;
-    public static double deluxe = 0;
-    public static double offer = 0;
-=======
+    
     public static double economy = 200;
     public static double standard = 400;
     public static double deluxe = 1000;
     public static double rabat = 0.8;
     public static double saldo = 0;
-    public static String brugernavn = "";
-    public static String password = "";
->>>>>>> origin/master
+    public static String bruger = "";
 
     public static void main(String[] args) {
 
@@ -28,7 +20,6 @@ public class carWash {
     {
 
     }
-<<<<<<< HEAD
    
    public static void ChangePrices()
    {
@@ -62,7 +53,6 @@ public class carWash {
    }
 }
 
-=======
     
     
     public static void ReadPrice()
@@ -102,4 +92,4 @@ public class carWash {
     }
 
 }
->>>>>>> origin/master
+
