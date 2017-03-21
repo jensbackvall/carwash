@@ -47,9 +47,9 @@ public class carWash
       Scanner sc = new Scanner (System.in);
       
       System.out.println("Indtast ny rabat");
-      offer = sc.nextDouble();
+      rabat = sc.nextDouble();
       
-      System.out.println("Ny rabat = " + offer);
+      System.out.println("Ny rabat = " + rabat);
       
       
    }
