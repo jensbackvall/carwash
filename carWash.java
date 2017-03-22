@@ -23,10 +23,12 @@ public class carWash
     public static void getDayTimeDate() {
         DateFormat day = new SimpleDateFormat("E");
         DateFormat time = new SimpleDateFormat("HH:mm:ss");
+        DateFormat hour = new SimpleDateFormat("HH");
         DateFormat date = new SimpleDateFormat("dd/MM/yy");
         Date dateobj = new Date();
         System.out.println(day.format(dateobj));
         System.out.println(time.format(dateobj));
+        System.out.println(hour.format(dateobj));
         System.out.println(date.format(dateobj));
     }
 
@@ -268,11 +270,11 @@ public class carWash
             double Saldo;
             Date date = new Date();
             if(washChoice == 1) {
-           float Pris = economy; 
+           float Pris = economy;
 }else if(washChoice == 2) {
         float Pris = standard;
 }else if(washChoice == 3) {
-  float Pris = deluxe; 
+  float Pris = deluxe;
 }else {
    System.out.println("Kære soede skat vil du ikke nok vælge en rigtig vask og prøve igen");
 break;
@@ -287,6 +289,6 @@ break;
         }else {
    System.out.println("du faar ingen kvittering fortsat god dag");
      }
-   }     
-} 
+   }
+}
 
