@@ -1,5 +1,7 @@
 import java.util.*;
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class carWash
 {
@@ -14,13 +16,18 @@ public class carWash
     public static void main(String[] args)
     {
 
-        login();
+
 
     }
 
-    public static void login()
-    {
-
+    public static void getDayTimeDate() {
+        DateFormat day = new SimpleDateFormat("E");
+        DateFormat time = new SimpleDateFormat("HH:mm:ss");
+        DateFormat date = new SimpleDateFormat("dd/MM/yy");
+        Date dateobj = new Date();
+        System.out.println(day.format(dateobj));
+        System.out.println(time.format(dateobj));
+        System.out.println(date.format(dateobj));
     }
 
     public static void buyWash(int user) {
@@ -221,7 +228,7 @@ public class carWash
         System.out.println("Indtast beløb (Mellem 1-10.000)");
         Scanner console = new Scanner(System.in);
         double amount = console.nextDouble();
-        System.out.println("***Wash card ejets***");
+        System.out.println("***Wash card ejects***");
         System.out.println();
         System.out.println("Indsæt kreditkort");
 
