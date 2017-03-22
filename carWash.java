@@ -36,7 +36,7 @@ public class carWash
         date = date.format(dateobj);
     }
 
-    public static void discountCheck() {
+    public static void discountCheck() { //den her virker sådan set kun når der er rabat, det vil sige en ugedag før kl 14. Skal opdateres torsdag.
         while (discount == false) {
             if (day == "Sun") {
                 System.out.println("No discount on Sundays!");
