@@ -70,16 +70,30 @@ public class carWash
             while(correctChoice == false) {
                 if(washChoice == 1) {
                     correctChoice = true;
-                    writeBalance.println((int)userBalance - economy);
-                    writeBalance.println((int)userPin);
-                    System.out.println("Du har valgt og betalt for en Economy vask. " + economy + " kr. bliver trukket fra dit kort.");
-                    return;
+                    if (discount == true) {
+                        writeBalance.println((int)userBalance - (economy * rabat));
+                        writeBalance.println((int)userPin);
+                        System.out.println("Du har valgt og betalt for en Economy vask med Early Bird rabat. " + (economy * rabat) + " kr. bliver trukket fra dit kort.");
+                        return;
+                    } else {
+                        writeBalance.println((int)userBalance - economy);
+                        writeBalance.println((int)userPin);
+                        System.out.println("Du har valgt og betalt for en Economy vask. " + economy + " kr. bliver trukket fra dit kort.");
+                        return;
+                    }
                 } else if(washChoice == 2) {
                     correctChoice = true;
-                    writeBalance.println((int)userBalance - standard);
-                    writeBalance.println((int)userPin);
-                    System.out.println("Du har valgt og betalt for en Stadard vask. " + standard + " kr. bliver trukket fra dit kort.");
-                    return;
+                    if (discount == true) {
+                        writeBalance.println((int)userBalance - (standard * rabat));
+                        writeBalance.println((int)userPin);
+                        System.out.println("Du har valgt og betalt for en Standard vask med Early Bird rabat. " + (standard * rabat) + " kr. bliver trukket fra dit kort.");
+                        return;
+                    } else {
+                        writeBalance.println((int)userBalance - standard);
+                        writeBalance.println((int)userPin);
+                        System.out.println("Du har valgt og betalt for en Standard vask. " + standard + " kr. bliver trukket fra dit kort.");
+                        return;
+                    }
                 } else if(washChoice == 3) {
                     correctChoice = true;
                     writeBalance.println((int)userBalance - deluxe);
@@ -87,7 +101,8 @@ public class carWash
                     System.out.println("Du har valgt og betalt for en DeLuxe vask. " + deluxe + " kr. bliver trukket fra dit kort.");
                     return;
                 } else {
-                    System.out.println("Du har ikke valgt en gyldig vask. Tast venligst 1, 2 eller 3!");                    washChoice = console.nextInt();
+                    System.out.println("Du har ikke valgt en gyldig vask. Tast venligst 1, 2 eller 3!");
+                    washChoice = console.nextInt();
                 }
             }
         }
