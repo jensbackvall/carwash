@@ -44,8 +44,7 @@ public class carWash
             } else if (day == "Sat") {
                 System.out.println("No discount on Saturdays!");
                 return;
-            }
-            if (hour < 14) {
+            } else if (hour < 14) {
                 discount = true;
                 System.out.println("It's your lucky day. You get a 20% discount!!!");
                 return;
