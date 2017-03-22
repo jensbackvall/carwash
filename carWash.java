@@ -29,9 +29,11 @@ public class carWash
         DateFormat thisDay = new SimpleDateFormat("E");
         DateFormat thisHour = new SimpleDateFormat("HH");
         Date dateobj = new Date();
-        day = thisDay.format(dateobj);
         String tempHour = thisHour.format(dateobj);
+        day = thisDay.format(dateobj);
         hour = Integer.parseInt(tempHour);
+        time = time.format(dateobj);
+        date = date.format(dateobj);
     }
 
     public static void discountCheck() {
