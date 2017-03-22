@@ -12,6 +12,11 @@ public class carWash
     public static double rabat = 0.8;
     public static double saldo = 0;
     public static String brugernavn = "";
+    public static String day = "";
+    public static int hour = 0;
+    public static DateFormat time = new SimpleDateFormat("HH:mm:ss");
+    public static DateFormat date = new SimpleDateFormat("dd/MM/yy");
+    public static boolean discount = false;
 
     public static void main(String[] args)
     {
@@ -21,15 +26,29 @@ public class carWash
     }
 
     public static void getDayTimeDate() {
-        DateFormat day = new SimpleDateFormat("E");
-        DateFormat time = new SimpleDateFormat("HH:mm:ss");
-        DateFormat hour = new SimpleDateFormat("HH");
-        DateFormat date = new SimpleDateFormat("dd/MM/yy");
+        DateFormat thisDay = new SimpleDateFormat("E");
+        DateFormat thisHour = new SimpleDateFormat("HH");
         Date dateobj = new Date();
-        System.out.println(day.format(dateobj));
-        System.out.println(time.format(dateobj));
-        System.out.println(hour.format(dateobj));
-        System.out.println(date.format(dateobj));
+        day = thisDay.format(dateobj);
+        String tempHour = thisHour.format(dateobj);
+        hour = Integer.parseInt(tempHour);
+    }
+
+    public static void discountCheck() {
+        while (discount == false) {
+            if (day == "Sun") {
+                System.out.println("No discount on Sundays!");
+                return;
+            } else if (day == "Sat") {
+                System.out.println("No discount on Saturdays!");
+                return;
+            }
+            if (hour < 14) {
+                discount = true;
+                System.out.println("It's your lucky day. You get a 20% discount!!!");
+                return;
+            }
+        }
     }
 
     public static void buyWash(int user) {
