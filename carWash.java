@@ -106,6 +106,48 @@ public class carWash
        }
         in.close();
     }
+    
+    public static void WriteStats(String s,String s2)
+    {
+      ArrayList<String> gamlelinjer = new ArrayList<String>();
+       try {
+       Scanner input = new Scanner(new File("stats.txt"));
+       while (input.hasNextLine()) 
+           {
+               String linje = input.nextLine();
+               String[] linjesplit = linje.split(" ");
+               if (linjesplit[0].equals("economy:")){
+               if (s.equals("economy")){
+               gamlelinjer.add(linjesplit[0]+" "+(linjesplit[1]+1));
+               }else{
+               gamlelinjer.add(linjesplit[0]+" "+linjesplit[1]);
+               }
+               }else if (linjesplit[0].equals("standard:")){
+               if (s.equals("standard")){
+               gamlelinjer.add(linjesplit[0]+" "+(linjesplit[1]+1));
+               }else{
+               gamlelinjer.add(linjesplit[0]+" "+linjesplit[1]);
+               }
+               }else if (linjesplit[0].equals("deluxe:")){
+               if (s.equals("deluxe")){
+               gamlelinjer.add(linjesplit[0]+" "+(linjesplit[1]+1));
+               }else{
+               gamlelinjer.add(linjesplit[0]+" "+linjesplit[1]);
+               }
+               }else if (linjesplit[0].equals("antalvaske:")){
+               gamlelinjer.add(linjesplit[0]+" "+(linjesplit[1]+1));
+               }
+           }
+           PrintStream writeStats = new PrintStream(new File("stats.txt"));
+           for (int i = 0; i < gamlelinjer.size(); i++){
+           writeStats.println(gamlelinjer[i]);
+           }
+           writeStats.println(s2);
+       }
+       catch(FileNotFoundException e) {
+        e.printStackTrace();
+       }
+    }
 
     public static void getDayTimeDate()
     {
