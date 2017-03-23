@@ -19,32 +19,33 @@ public class carWash
 
     public static void main(String[] args)
     {
-        buyWash(brugernavn);
+        login();
     }
-    
-    public static void login() 
+
+    public static void login()
     {
        Scanner in = new Scanner (System.in);
-      
+
        int antalFejl = 0;
        int password;
+       String oc;
        boolean loop = false;
        boolean filIkkeFundet = true;
-       
-       
-       while(loop == false) 
-       { 
+
+
+       while(loop == false)
+       {
        filIkkeFundet = true;
        System.out.print("Brugernavn: ");
        brugernavn = in.nextInt();
        System.out.print("Password: ");
        password = in.nextInt();
 
-          try 
+          try
           {
              Scanner input = new Scanner(new File("bruger"+brugernavn+".txt"));
-             
-             while (input.hasNextLine()) 
+
+             while (input.hasNextLine())
              {
                   String linje = input.nextLine();
                   String[] linjesplit = linje.split(" ");
@@ -58,20 +59,20 @@ public class carWash
                   }
                   if (linjesplit[0].equals("Lukket:"))
                   {
-                     PIN = Integer.parseInt(linjesplit[1]);
+                     oc = Integer.parseInt(linjesplit[1]);
                   }
              }
           }
-          catch(FileNotFoundException e) 
+          catch(FileNotFoundException e)
           {
             System.out.println("Wash Card blev ikke registeret. Prøv igen!");
             filIkkeFundet = false;
           }
-          
+
           if(filIkkeFundet == true)
           {
              if(password != PIN)
-             { 
+             {
                   antalFejl++;
                   if(antalFejl >= 3)
                   {
@@ -80,18 +81,17 @@ public class carWash
                      return;
                      // Skriv til fil på linje 3 = 1. 1 betyder lukket - 2 betyder ikke lukket.
                   }
-                  
+
                   if(antalFejl < 3)
-                  {              
+                  {
                      System.out.println("Fejl - Prøv igen.\nDu har " + (3 - antalFejl) + " forsøg tilbage.");
                   }
              }
-             
+
              else
              {
-               System.out.print("Rigtig");
                loop = true;
-               // Skriv til fil whuuu
+               menu();
              }
           }
        }
@@ -127,7 +127,7 @@ public class carWash
     {
         try {
             Scanner console = new Scanner(System.in);
-            Scanner userFile = new Scanner(new File(user + ".txt"));
+            Scanner userFile = new Scanner(new File("bruger" + user + ".txt"));
             System.out.println("Du kan vælge mellem følgende vasketyper:");
             System.out.println("1. Economy (pris: " + economy + ").");
             System.out.println("2. Standard (pris: " + standard + ").");
@@ -135,10 +135,10 @@ public class carWash
             System.out.println("Vælg venligst en vasketype (skriv 1, 2 eller 3):");
             int washChoice = console.nextInt();
             String ub = userFile.nextLine();
-            String up = userFile.nextLine();
-            PrintStream writeBalance = new PrintStream(new File(user + ".txt"));
+            String userPin = userFile.nextLine();
+            String cardClosed = userFile.nextLine();
+            PrintStream writeBalance = new PrintStream(new File("bruger" + user + ".txt"));
             double userBalance = Double.parseDouble(ub);
-            double userPin = Double.parseDouble(up);
             boolean correctChoice = false;
             console.close();
             userFile.close();
@@ -170,7 +170,8 @@ public class carWash
                     washChoice = console.nextInt();
                 }
                 writeBalance.println((int)saldo);
-                writeBalance.println((int)userPin);
+                writeBalance.println(userPin);
+                writeBalance.println(cardClosed);
                 writeBalance.close();
                 return; //Skal kalde kvitteringmetoden og derefter returnere til loginmetoden
             }
@@ -309,6 +310,7 @@ public class carWash
             System.out.println("Indtast kategoriens nummer for at vaelge den");
             System.out.println("1) aendre priser");
             System.out.println("2) Se statestik");
+            System.out.print("Valg: ");
             choice = in.nextInt();
 
         switch(choice)

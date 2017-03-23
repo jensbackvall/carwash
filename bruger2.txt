@@ -1,0 +1,4 @@
+Saldo: 5000
+PIN: 1234
+Lukket: 02
+2
