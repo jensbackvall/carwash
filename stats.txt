@@ -1,0 +1,4 @@
+Antalvaske: 0
+economy: 0
+standard: 0
+deluxe: 0
