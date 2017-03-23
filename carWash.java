@@ -204,7 +204,7 @@ public class carWash
         switch (choice)
         {
             case 1: optionNotAvailable = false;
-                    admin();
+                    buyWash(brugernavn);
                     break;
 
             case 2: optionNotAvailable = false;
