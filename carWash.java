@@ -11,15 +11,14 @@ public class carWash
     public static double deluxe = 1000;
     public static double rabat = 0.8;
     public static double saldo = 0;
-    public static String brugernavn = "";
+    public static int brugernavn = 2;
     public static String day = "";
     public static int hour = 0;
-    public static DateFormat time = new SimpleDateFormat("HH:mm:ss");
-    public static DateFormat date = new SimpleDateFormat("dd/MM/yy");
+
 
     public static void main(String[] args)
     {
-
+        buyWash(brugernavn);
 
 
     }
@@ -32,9 +31,7 @@ public class carWash
         String tempHour = thisHour.format(dateobj);
         day = thisDay.format(dateobj);
         hour = Integer.parseInt(tempHour);
-        time = time.format(dateobj);
-        date = date.format(dateobj);
-    }
+     }
 
     public static boolean discountCheck()
     {
@@ -49,6 +46,7 @@ public class carWash
                 System.out.println("Hvor er du heldig!!! Du får 20% rabat");
                 return true;
             }
+            return false;
     }
 
     public static void buyWash(int user)
@@ -74,44 +72,33 @@ public class carWash
                 if(washChoice == 1) {
                     correctChoice = true;
                     if (discountCheck() == true) {
-                        writeBalance.println((int)userBalance - (economy * rabat));
-                        writeBalance.println((int)userPin);
-                        writeBalance.close();
+                        saldo = (int)userBalance - (economy * rabat);
                         System.out.println("Du har valgt og betalt for en Economy vask med Early Bird rabat. " + (economy * rabat) + " kr. bliver trukket fra dit kort.");
-                        return; //Skal kalde kvitteringmetoden og derefter returnere til loginmetoden
                     } else {
-                        writeBalance.println((int)userBalance - economy);
-                        writeBalance.println((int)userPin);
-                        writeBalance.close();
+                        saldo = (int)userBalance - (economy);
                         System.out.println("Du har valgt og betalt for en Economy vask. " + economy + " kr. bliver trukket fra dit kort.");
-                        return; //Skal kalde kvitteringmetoden og derefter returnere til loginmetoden
                     }
                 } else if(washChoice == 2) {
                     correctChoice = true;
                     if (discountCheck() == true) {
-                        writeBalance.println((int)userBalance - (standard * rabat));
-                        writeBalance.println((int)userPin);
-                        writeBalance.close();
+                        saldo = (int)userBalance - (standard * rabat);
                         System.out.println("Du har valgt og betalt for en Standard vask med Early Bird rabat. " + (standard * rabat) + " kr. bliver trukket fra dit kort.");
-                        return; //Skal kalde kvitteringmetoden og derefter returnere til loginmetoden
                     } else {
-                        writeBalance.println((int)userBalance - standard);
-                        writeBalance.println((int)userPin);
-                        writeBalance.close();
+                        saldo = (int)userBalance - standard;
                         System.out.println("Du har valgt og betalt for en Standard vask. " + standard + " kr. bliver trukket fra dit kort.");
-                        return; //Skal kalde kvitteringmetoden og derefter returnere til loginmetoden
                     }
                 } else if(washChoice == 3) {
                     correctChoice = true;
-                    writeBalance.println((int)userBalance - deluxe);
-                    writeBalance.println((int)userPin);
-                    writeBalance.close();
+                    saldo = (int)userBalance - deluxe;
                     System.out.println("Du har valgt og betalt for en DeLuxe vask. " + deluxe + " kr. bliver trukket fra dit kort.");
-                    return; //Skal kalde kvitteringmetoden og derefter returnere til loginmetoden
                 } else {
                     System.out.println("Du har ikke valgt en gyldig vask. Tast venligst 1, 2 eller 3!");
                     washChoice = console.nextInt();
                 }
+                writeBalance.println((int)saldo);
+                writeBalance.println((int)userPin);
+                writeBalance.close();
+                return; //Skal kalde kvitteringmetoden og derefter returnere til loginmetoden
             }
         }
         catch(FileNotFoundException e) {
@@ -187,11 +174,11 @@ public class carWash
        }
     }
 
-    public static menu(String bruger)
-    {
-        if( bruger.equals("01")) {
+    public static void menu() {
+        if( brugernavn == 1) {
             admin();
-        else
+        } else
+        {
         customer();
         }
     }
@@ -266,61 +253,23 @@ public class carWash
     }
     }
 
-    public static void refill()
-    {
-        System.out.println("Optankning");
-        System.out.println("Indtast beløb (Mellem 1-10.000)");
-        Scanner console = new Scanner(System.in);
-        double amount = console.nextDouble();
-        System.out.println("***Wash card ejects***");
-        System.out.println();
-        System.out.println("Indsæt kreditkort");
-
-        System.out.println("***Press enter when credit card has been inserted***");
-        console.nextLine();
-        console.nextLine();
-        System.out.println("Indtast pinkode");
-        int pin = 1234;
-        int enteredPin = console.nextInt();
-        int count = 0;
-        while(enteredPin != pin && count < 2) {
-            System.out.println("Forkert pinkode - Prøv igen");
-            enteredPin = console.nextInt();
-            count++;
-        }
-        if(enteredPin==pin){
-            System.out.println(amount + "kr");
-            System.out.println("Tryk 1 og enter for at godkende");
-            System.out.println("Tryk 2 og enter for at fortryde");
-        }
-        else{
-            System.out.print("Korter er spærret");
-        }
-        int godkendFortryd = console.nextInt();
-        while(godkendFotryd != 1 || godkendFotryd != 2) {
-
-        }
-    }
 
 
-}
-  public static void receipt()
+  public static void receipt(int washChoice)
   {
-             Scanner in = new Scanner(System.in);
-             int a;
-            int washChoice;
+        Scanner in = new Scanner(System.in);
+        int a;
             double Pris;
-            double Saldo;
             Date date = new Date();
             if(washChoice == 1) {
-           float Pris = economy;
-}else if(washChoice == 2) {
-        float Pris = standard;
+            Pris = economy;
+            }else if(washChoice == 2) {
+        Pris = standard;
 }else if(washChoice == 3) {
-  float Pris = deluxe;
+  Pris = deluxe;
 }else {
    System.out.println("Kære soede skat vil du ikke nok vælge en rigtig vask og prøve igen");
-break;
+return;
 }
         System.out.println("Tast 1 for kvittering ellers tast 2.");
        a = in.nextInt();
@@ -328,10 +277,11 @@ break;
    System.out.println("Her faar du din kvittering fortssat god dag");
      System.out.println(" " + date);
      System.out.println(" " + Pris);
-        System.out.println("Dette er din tilbageværende saldo " + Saldo)
-        }else {
+        System.out.println("Dette er din tilbageværende saldo " + saldo);
+        } else {
    System.out.println("du faar ingen kvittering fortsat god dag");
      }
    }
 }
+
 
