@@ -15,6 +15,7 @@ public class carWash
     public static String day = "";
     public static int hour = 0;
     public static int PIN;
+    public static int oc;
 
 
     public static void main(String[] args)
@@ -27,8 +28,9 @@ public class carWash
        Scanner in = new Scanner (System.in);
 
        int antalFejl = 0;
+
        int password;
-       String oc;
+
        boolean loop = false;
        boolean filIkkeFundet = true;
 
@@ -61,7 +63,15 @@ public class carWash
                   {
                      oc = Integer.parseInt(linjesplit[1]);
                   }
+                  if (oc == 1)
+                  {
+                    login();
+                    input.close();
+                    in.close();
+                    return;
+                  }
              }
+             input.close();
           }
           catch(FileNotFoundException e)
           {
@@ -95,6 +105,7 @@ public class carWash
              }
           }
        }
+        in.close();
     }
 
     public static void getDayTimeDate()
@@ -132,9 +143,13 @@ public class carWash
             System.out.println("1. Economy (pris: " + economy + ").");
             System.out.println("2. Standard (pris: " + standard + ").");
             System.out.println("3. DeLuxe (pris: " + deluxe + ").");
-            System.out.println("Vælg venligst en vasketype (skriv 1, 2 eller 3):");
+            System.out.print("Vælg venligst en vasketype:");
             int washChoice = console.nextInt();
-            String ub = userFile.nextLine();
+
+            String saldoLine = userFile.nextLine();
+            String[] linjesplit = saldoLine.split(" ");
+            String ub = linjesplit[1];
+
             String userPin = userFile.nextLine();
             String cardClosed = userFile.nextLine();
             PrintStream writeBalance = new PrintStream(new File("bruger" + user + ".txt"));
@@ -358,87 +373,87 @@ return;
    System.out.println("du faar ingen kvittering fortsat god dag");
      }
    }
-      
-    
-    public static void refill()
-   {
-      System.out.println("Optankning");
-      System.out.println("Indtast beløb (Mellem 1-10.000)");
-      Scanner console = new Scanner(System.in);
-      double amount = console.nextDouble();
-      
-      while(amount < 1  || amount > 10000) {
-      System.out.println("Det indtastede beløb er ikke mellem 1 og 10.000 - Prøv igen");
-      amount = console.nextDouble();
-      }
-      
-      System.out.println("***Wash card ejets***");
-      System.out.println();
-      System.out.println("Indsæt kreditkort");
-      
-      System.out.println("***Press ENTER when credit card has been inserted***");
-      console.nextLine();
-      console.nextLine();
-      
-      System.out.println("Indtast pinkode");
-      int pin = 1234;
-      int enteredPin = console.nextInt();
-      int count = 0;
-      while(enteredPin != pin && count < 2){
-      System.out.println("Forkert pinkode - Prøv igen");
-      enteredPin = console.nextInt();
-      count++;
-      }
-      
-      if(enteredPin==pin){
-      System.out.println(amount + "kr");
-      System.out.println("For at godkende TRYK 1  -  For at fortryde TRYK 2");
-      System.out.println("Afslut med ENTER");
-      }
-      else{
-      System.out.print("Korter er spærret");
-      }
-      
-      int godkendFortrydKøb = console.nextInt();
-      
-      while(godkendFortrydKøb != 1 && godkendFortrydKøb != 2) {
-      System.out.println("Du har ikke tastet 1 eller 2 - Prøv igen");
-      godkendFortrydKøb = console.nextInt();
-      }
-      
-      if (godkendFortrydKøb == 2){
-      console.close;
-      login();
-      return;
-      }
-      
-      System.out.println("Udskriv kvittering?");
-      System.out.println("Tryk 1 for JA  -  Tryk 2 for NEJ");
-      
-      int jaNejKvit = console.nextInt();
-      
-      while(jaNejKvit != 1 && jaNejKvit != 2) {
-      System.out.println("Du har ikke tastet 1 eller 2 - Prøv igen");
-      jaNejKvit = console.nextInt();
-      }
 
-      
-      if(jaNejKvit == 1){
-      System.out.println("***Kvittering udskrives***");
-      System.out.println("Du har indsat " + amount + "kr. på vaskekortet");
-      System.out.println("Din nye saldo er" + (amount + saldo) + " kr.");
-      System.out.println("Tryk ENTER for at logge ud - Go' dag!");
-      console.nextLine();
-      console.nextLine();
-      }
-      else{
-      console.close;
-      login();
-      return;
-      }
-    }
-    
-    
+
+    // public static void refill()
+    // {
+    //   System.out.println("Optankning");
+    //   System.out.println("Indtast beløb (Mellem 1-10.000)");
+    //   Scanner console = new Scanner(System.in);
+    //   double amount = console.nextDouble();
+
+    //   while(amount < 1  || amount > 10000) {
+    //   System.out.println("Det indtastede beløb er ikke mellem 1 og 10.000 - Prøv igen");
+    //   amount = console.nextDouble();
+    //   }
+
+    //   System.out.println("***Wash card ejets***");
+    //   System.out.println();
+    //   System.out.println("Indsæt kreditkort");
+
+    //   System.out.println("***Press ENTER when credit card has been inserted***");
+    //   console.nextLine();
+    //   console.nextLine();
+
+    //   System.out.println("Indtast pinkode");
+    //   int pin = 1234;
+    //   int enteredPin = console.nextInt();
+    //   int count = 0;
+    //   while(enteredPin != pin && count < 2){
+    //   System.out.println("Forkert pinkode - Prøv igen");
+    //   enteredPin = console.nextInt();
+    //   count++;
+    //   }
+
+    //   if(enteredPin==pin){
+    //   System.out.println(amount + "kr");
+    //   System.out.println("For at godkende TRYK 1  -  For at fortryde TRYK 2");
+    //   System.out.println("Afslut med ENTER");
+    //   }
+    //   else{
+    //   System.out.print("Korter er spærret");
+    //   }
+
+    //   int godkendFortrydKøb = console.nextInt();
+
+    //   while(godkendFortrydKøb != 1 && godkendFortrydKøb != 2) {
+    //   System.out.println("Du har ikke tastet 1 eller 2 - Prøv igen");
+    //   godkendFortrydKøb = console.nextInt();
+    //   }
+
+    //   if (godkendFortrydKøb == 2){
+    //   console.close;
+    //   login();
+    //   return;
+    //   }
+
+    //   System.out.println("Udskriv kvittering?");
+    //   System.out.println("Tryk 1 for JA  -  Tryk 2 for NEJ");
+
+    //   int jaNejKvit = console.nextInt();
+
+    //   while(jaNejKvit != 1 && jaNejKvit != 2) {
+    //   System.out.println("Du har ikke tastet 1 eller 2 - Prøv igen");
+    //   jaNejKvit = console.nextInt();
+    //   }
+
+
+    //   if(jaNejKvit == 1){
+    //   System.out.println("***Kvittering udskrives***");
+    //   System.out.println("Du har indsat " + amount + "kr. på vaskekortet");
+    //   System.out.println("Din nye saldo er" + (amount + saldo) + " kr.");
+    //   System.out.println("Tryk ENTER for at logge ud - Go' dag!");
+    //   console.nextLine();
+    //   console.nextLine();
+    //   }
+    //   else{
+    //   console.close;
+    //   login();
+    //   return;
+    //   }
+    // }
+
+
 }
 
 
