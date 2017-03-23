@@ -65,17 +65,21 @@ public class carWash
             double userBalance = Double.parseDouble(ub);
             double userPin = Double.parseDouble(up);
             boolean correctChoice = false;
+            console.close();
+            userFile.close();
             while(correctChoice == false) {
                 if(washChoice == 1) {
                     correctChoice = true;
                     if (discountCheck() == true) {
                         writeBalance.println((int)userBalance - (economy * rabat));
                         writeBalance.println((int)userPin);
+                        writeBalance.close();
                         System.out.println("Du har valgt og betalt for en Economy vask med Early Bird rabat. " + (economy * rabat) + " kr. bliver trukket fra dit kort.");
                         return; //Skal kalde kvitteringmetoden og derefter returnere til loginmetoden
                     } else {
                         writeBalance.println((int)userBalance - economy);
                         writeBalance.println((int)userPin);
+                        writeBalance.close();
                         System.out.println("Du har valgt og betalt for en Economy vask. " + economy + " kr. bliver trukket fra dit kort.");
                         return; //Skal kalde kvitteringmetoden og derefter returnere til loginmetoden
                     }
@@ -84,11 +88,13 @@ public class carWash
                     if (discountCheck() == true) {
                         writeBalance.println((int)userBalance - (standard * rabat));
                         writeBalance.println((int)userPin);
+                        writeBalance.close();
                         System.out.println("Du har valgt og betalt for en Standard vask med Early Bird rabat. " + (standard * rabat) + " kr. bliver trukket fra dit kort.");
                         return; //Skal kalde kvitteringmetoden og derefter returnere til loginmetoden
                     } else {
                         writeBalance.println((int)userBalance - standard);
                         writeBalance.println((int)userPin);
+                        writeBalance.close();
                         System.out.println("Du har valgt og betalt for en Standard vask. " + standard + " kr. bliver trukket fra dit kort.");
                         return; //Skal kalde kvitteringmetoden og derefter returnere til loginmetoden
                     }
@@ -96,6 +102,7 @@ public class carWash
                     correctChoice = true;
                     writeBalance.println((int)userBalance - deluxe);
                     writeBalance.println((int)userPin);
+                    writeBalance.close();
                     System.out.println("Du har valgt og betalt for en DeLuxe vask. " + deluxe + " kr. bliver trukket fra dit kort.");
                     return; //Skal kalde kvitteringmetoden og derefter returnere til loginmetoden
                 } else {
