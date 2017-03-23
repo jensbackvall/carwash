@@ -16,7 +16,6 @@ public class carWash
     public static int hour = 0;
     public static DateFormat time = new SimpleDateFormat("HH:mm:ss");
     public static DateFormat date = new SimpleDateFormat("dd/MM/yy");
-    public static boolean discount = false;
 
     public static void main(String[] args)
     {
@@ -36,20 +35,18 @@ public class carWash
         date = date.format(dateobj);
     }
 
-    public static void discountCheck() { //den her virker sådan set kun når der er rabat, det vil sige en ugedag før kl 14. Skal opdateres torsdag.
-        while (discount == false) {
+    public static boolean discountCheck() {
+            getDayTimeDate();
             if (day == "Sun") {
                 System.out.println("No discount on Sundays!");
-                return;
+                return false;
             } else if (day == "Sat") {
                 System.out.println("No discount on Saturdays!");
-                return;
+                return false;
             } else if (hour < 14) {
-                discount = true;
                 System.out.println("It's your lucky day. You get a 20% discount!!!");
-                return;
+                return true;
             }
-        }
     }
 
     public static void buyWash(int user) {
@@ -71,36 +68,36 @@ public class carWash
             while(correctChoice == false) {
                 if(washChoice == 1) {
                     correctChoice = true;
-                    if (discount == true) {
+                    if (discountCheck() == true) {
                         writeBalance.println((int)userBalance - (economy * rabat));
                         writeBalance.println((int)userPin);
                         System.out.println("Du har valgt og betalt for en Economy vask med Early Bird rabat. " + (economy * rabat) + " kr. bliver trukket fra dit kort.");
-                        return;
+                        return; //Skal kalde kvitteringmetoden og derefter returnere til loginmetoden
                     } else {
                         writeBalance.println((int)userBalance - economy);
                         writeBalance.println((int)userPin);
                         System.out.println("Du har valgt og betalt for en Economy vask. " + economy + " kr. bliver trukket fra dit kort.");
-                        return;
+                        return; //Skal kalde kvitteringmetoden og derefter returnere til loginmetoden
                     }
                 } else if(washChoice == 2) {
                     correctChoice = true;
-                    if (discount == true) {
+                    if (discountCheck() == true) {
                         writeBalance.println((int)userBalance - (standard * rabat));
                         writeBalance.println((int)userPin);
                         System.out.println("Du har valgt og betalt for en Standard vask med Early Bird rabat. " + (standard * rabat) + " kr. bliver trukket fra dit kort.");
-                        return;
+                        return; //Skal kalde kvitteringmetoden og derefter returnere til loginmetoden
                     } else {
                         writeBalance.println((int)userBalance - standard);
                         writeBalance.println((int)userPin);
                         System.out.println("Du har valgt og betalt for en Standard vask. " + standard + " kr. bliver trukket fra dit kort.");
-                        return;
+                        return; //Skal kalde kvitteringmetoden og derefter returnere til loginmetoden
                     }
                 } else if(washChoice == 3) {
                     correctChoice = true;
                     writeBalance.println((int)userBalance - deluxe);
                     writeBalance.println((int)userPin);
                     System.out.println("Du har valgt og betalt for en DeLuxe vask. " + deluxe + " kr. bliver trukket fra dit kort.");
-                    return;
+                    return; //Skal kalde kvitteringmetoden og derefter returnere til loginmetoden
                 } else {
                     System.out.println("Du har ikke valgt en gyldig vask. Tast venligst 1, 2 eller 3!");
                     washChoice = console.nextInt();
