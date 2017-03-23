@@ -38,13 +38,13 @@ public class carWash
     public static boolean discountCheck() {
             getDayTimeDate();
             if (day == "Sun") {
-                System.out.println("No discount on Sundays!");
+                System.out.println("Ingen rabat om søndagen!");
                 return false;
             } else if (day == "Sat") {
-                System.out.println("No discount on Saturdays!");
+                System.out.println("Ingen rabat om lørdagen!");
                 return false;
             } else if (hour < 14) {
-                System.out.println("It's your lucky day. You get a 20% discount!!!");
+                System.out.println("Hvor er du heldig!!! Du får 20% rabat");
                 return true;
             }
     }
