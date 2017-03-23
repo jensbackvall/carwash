@@ -24,7 +24,8 @@ public class carWash
 
     }
 
-    public static void getDayTimeDate() {
+    public static void getDayTimeDate()
+    {
         DateFormat thisDay = new SimpleDateFormat("E");
         DateFormat thisHour = new SimpleDateFormat("HH");
         Date dateobj = new Date();
@@ -35,7 +36,8 @@ public class carWash
         date = date.format(dateobj);
     }
 
-    public static boolean discountCheck() {
+    public static boolean discountCheck()
+    {
             getDayTimeDate();
             if (day == "Sun") {
                 System.out.println("Ingen rabat om søndagen!");
@@ -49,7 +51,8 @@ public class carWash
             }
     }
 
-    public static void buyWash(int user) {
+    public static void buyWash(int user)
+    {
         try {
             Scanner console = new Scanner(System.in);
             Scanner userFile = new Scanner(new File(user + ".txt"));
@@ -129,9 +132,9 @@ public class carWash
         System.out.println("indtast nye priser pÃ¥ deluxe");
         deluxe = sc.nextDouble();
 
-        System.out.println("Ny pris pÃ¥ economy = " + economy);
-        System.out.println("Ny pris pÃ¥ standard = " + standard);
-        System.out.println("Ny pris pÃ¥ deluxe = " + deluxe);
+        System.out.println("Ny pris på economy = " + economy);
+        System.out.println("Ny pris på standard = " + standard);
+        System.out.println("Ny pris på deluxe = " + deluxe);
     }
 
     public static void changeRabat()
@@ -301,7 +304,8 @@ public class carWash
 
 
 }
-  public static void receipt() {
+  public static void receipt()
+  {
              Scanner in = new Scanner(System.in);
              int a;
             int washChoice;
