@@ -19,8 +19,80 @@ public class carWash
     public static void main(String[] args)
     {
         buyWash(brugernavn);
+    }
+    
+    public static void login() 
+    {
+       Scanner in = new Scanner (System.in);
+      
+       int antalFejl = 0;
+       int password;
+       boolean loop = false;
+       boolean filIkkeFundet = true;
+       
+       
+       while(loop == false) 
+       { 
+       filIkkeFundet = true;
+       System.out.print("Brugernavn: ");
+       brugernavn = in.nextInt();
+       System.out.print("Password: ");
+       password = in.nextInt();
 
-
+          try 
+          {
+             Scanner input = new Scanner(new File("bruger"+brugernavn+".txt"));
+             
+             while (input.hasNextLine()) 
+             {
+                  String linje = input.nextLine();
+                  String[] linjesplit = linje.split(" ");
+                  if (linjesplit[0].equals("Saldo:"))
+                  {
+                     saldo = Integer.parseInt(linjesplit[1]);
+                  }
+                  if (linjesplit[0].equals("PIN:"))
+                  {
+                     PIN = Integer.parseInt(linjesplit[1]);
+                  }
+                  if (linjesplit[0].equals("Lukket:"))
+                  {
+                     PIN = Integer.parseInt(linjesplit[1]);
+                  }
+             }
+          }
+          catch(FileNotFoundException e) 
+          {
+            System.out.println("Wash Card blev ikke registeret. Prøv igen!");
+            filIkkeFundet = false;
+          }
+          
+          if(filIkkeFundet == true)
+          {
+             if(password != PIN)
+             { 
+                  antalFejl++;
+                  if(antalFejl >= 3)
+                  {
+                     System.out.println("Dit kort er nu lukket. Buhu");
+                     loop = true;
+                     // Skriv til fil på linje 3 = 1. 1 betyder lukket - 2 betyder ikke lukket.
+                  }
+                  
+                  if(antalFejl < 3)
+                  {              
+                     System.out.println("Fejl - Prøv igen.\nDu har " + (3 - antalFejl) + " forsøg tilbage.");
+                  }
+             }
+             
+             else
+             {
+               System.out.print("Rigtig");
+               loop = true;
+               // Skriv til fil whuuu
+             }
+          }
+       }
     }
 
     public static void getDayTimeDate()
