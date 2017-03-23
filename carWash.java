@@ -14,6 +14,7 @@ public class carWash
     public static int brugernavn = 2;
     public static String day = "";
     public static int hour = 0;
+    public static int PIN;
 
 
     public static void main(String[] args)
@@ -76,6 +77,7 @@ public class carWash
                   {
                      System.out.println("Dit kort er nu lukket. Buhu");
                      loop = true;
+                     return;
                      // Skriv til fil på linje 3 = 1. 1 betyder lukket - 2 betyder ikke lukket.
                   }
                   
