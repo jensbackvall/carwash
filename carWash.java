@@ -108,44 +108,57 @@ public class carWash
 
     public static void WriteStats(String s,String s2)
     {
-      ArrayList<String> gamlelinjer = new ArrayList<String>();
-       try {
-       Scanner input = new Scanner(new File("stats.txt"));
-       while (input.hasNextLine())
-           {
-               String linje = input.nextLine();
-               String[] linjesplit = linje.split(" ");
-               if (linjesplit[0].equals("economy:")){
-               if (s.equals("economy")){
-               gamlelinjer.add(linjesplit[0]+" "+(linjesplit[1]+1));
-               }else{
-               gamlelinjer.add(linjesplit[0]+" "+linjesplit[1]);
-               }
-               }else if (linjesplit[0].equals("standard:")){
-               if (s.equals("standard")){
-               gamlelinjer.add(linjesplit[0]+" "+(linjesplit[1]+1));
-               }else{
-               gamlelinjer.add(linjesplit[0]+" "+linjesplit[1]);
-               }
-               }else if (linjesplit[0].equals("deluxe:")){
-               if (s.equals("deluxe")){
-               gamlelinjer.add(linjesplit[0]+" "+(linjesplit[1]+1));
-               }else{
-               gamlelinjer.add(linjesplit[0]+" "+linjesplit[1]);
-               }
-               }else if (linjesplit[0].equals("antalvaske:")){
-               gamlelinjer.add(linjesplit[0]+" "+(linjesplit[1]+1));
-               }
-           }
-           PrintStream writeStats = new PrintStream(new File("stats.txt"));
-           for (int i = 0; i < gamlelinjer.size(); i++){
-           writeStats.println(gamlelinjer[i]);
-           }
-           writeStats.println(s2);
-       }
-       catch(FileNotFoundException e) {
+        ArrayList<String> gamlelinjer = new ArrayList<String>();
+        try
+        {
+            Scanner input = new Scanner(new File("stats.txt"));
+            while (input.hasNextLine())
+            {
+                String linje = input.nextLine();
+                String[] linjesplit = linje.split(" ");
+                if (linjesplit[0].equals("economy:"))
+                {
+                    if (s.equals("economy"))
+                    {
+                        gamlelinjer.add(linjesplit[0]+" "+(linjesplit[1]+1));
+                    } else
+                    {
+                        gamlelinjer.add(linjesplit[0]+" "+linjesplit[1]);
+                    }
+                } else if (linjesplit[0].equals("standard:"))
+                {
+                    if (s.equals("standard"))
+                    {
+                        gamlelinjer.add(linjesplit[0]+" "+(linjesplit[1]+1));
+                    } else
+                    {
+                        gamlelinjer.add(linjesplit[0]+" "+linjesplit[1]);
+                    }
+                } else if (linjesplit[0].equals("deluxe:"))
+                {
+                    if (s.equals("deluxe"))
+                    {
+                        gamlelinjer.add(linjesplit[0]+" "+(linjesplit[1]+1));
+                    }else
+                    {
+                        gamlelinjer.add(linjesplit[0]+" "+linjesplit[1]);
+                    }
+                } else if (linjesplit[0].equals("antalvaske:"))
+                {
+                    gamlelinjer.add(linjesplit[0]+" "+(linjesplit[1]+1));
+                }
+            }
+            PrintStream writeStats = new PrintStream(new File("stats.txt"));
+            for (int i = 0; i < gamlelinjer.size(); i++)
+            {
+                writeStats.println(gamlelinjer.get(i));
+            }
+            writeStats.println(s2);
+        }
+        catch(FileNotFoundException e)
+        {
         e.printStackTrace();
-       }
+        }
     }
 
     public static void getDayTimeDate()
@@ -177,7 +190,8 @@ public class carWash
 
     public static void buyWash(int user)
     {
-        try {
+        try
+        {
             Scanner console = new Scanner(System.in);
             Scanner userFile = new Scanner(new File("bruger" + user + ".txt"));
             System.out.println("Du kan vælge mellem følgende vasketyper:");
@@ -196,32 +210,41 @@ public class carWash
             boolean correctChoice = false;
             console.close();
             userFile.close();
-            while(correctChoice == false) {
-                if(washChoice == 1) {
+            while(correctChoice == false)
+            {
+                if(washChoice == 1)
+                {
                   getDayTimeDate();
                     WriteStats("economy", thisDate);
                     correctChoice = true;
-                    if (discountCheck() == true) {
+                    if (discountCheck() == true)
+                    {
                         saldo = (int)userBalance - (economy * rabat);
                         System.out.println("Du har valgt og betalt for en Economy vask med Early Bird rabat " + (economy * rabat) + " kr. bliver trukket fra dit kort.");
-                    } else {
+                    } else
+                    {
                         saldo = (int)userBalance - (economy);
                         System.out.println("Du har valgt og betalt for en Economy vask " + economy + " kr. bliver trukket fra dit kort.");
                     }
-                } else if(washChoice == 2) {
+                } else if(washChoice == 2)
+                {
                     correctChoice = true;
-                    if (discountCheck() == true) {
+                    if (discountCheck() == true)
+                    {
                         saldo = (int)userBalance - (standard * rabat);
                         System.out.println("Du har valgt og betalt for en Standard vask med Early Bird rabat " + (standard * rabat) + " kr. bliver trukket fra dit kort.");
-                    } else {
+                    } else
+                    {
                         saldo = (int)userBalance - standard;
                         System.out.println("Du har valgt og betalt for en Standard vask " + standard + " kr. bliver trukket fra dit kort.");
                     }
-                } else if(washChoice == 3) {
+                } else if(washChoice == 3)
+                {
                     correctChoice = true;
                     saldo = (int)userBalance - deluxe;
                     System.out.println("Du har valgt og betalt for en DeLuxe vask " + deluxe + " kr. bliver trukket fra dit kort.");
-                } else {
+                } else
+                {
                     System.out.println("Du har ikke valgt en gyldig vask \nTast venligst 1, 2 eller 3!");
                     washChoice = console.nextInt();
                 }
@@ -233,7 +256,8 @@ public class carWash
                 login();
             }
         }
-        catch(FileNotFoundException e) {
+        catch(FileNotFoundException e)
+        {
             e.printStackTrace();
         }
     }
@@ -401,33 +425,39 @@ public class carWash
 
 
 
-  public static void receipt(int washChoice)
-  {
+    public static void receipt(int washChoice)
+    {
         Scanner in = new Scanner(System.in);
         int a;
-            double Pris;
-            Date date = new Date();
-            if(washChoice == 1) {
+        double Pris;
+        Date date = new Date();
+        if(washChoice == 1)
+        {
             Pris = economy;
-            }else if(washChoice == 2) {
+        } else if(washChoice == 2)
+        {
         Pris = standard;
-}else if(washChoice == 3) {
-  Pris = deluxe;
-}else {
-   System.out.println("Kære soede skat vil du ikke nok vælge en rigtig vask og prøve igen!");
-return;
-}
+        } else if(washChoice == 3)
+        {
+        Pris = deluxe;
+        }else
+        {
+        System.out.println("Kære soede skat vil du ikke nok vælge en rigtig vask og prøve igen!");
+        return;
+        }
         System.out.println("Tast 1 for kvittering ellers tast 2.");
-       a = in.nextInt();
-     if(a == 1) {
-   System.out.println("Her faar du din kvittering fortsat god dag.");
-     System.out.println(" " + date);
-     System.out.println(" " + Pris);
+        a = in.nextInt();
+        if(a == 1)
+        {
+        System.out.println("Her faar du din kvittering fortsat god dag.");
+        System.out.println(" " + date);
+        System.out.println(" " + Pris);
         System.out.println("Dette er din tilbageværende saldo " + saldo);
-        } else {
-   System.out.println("du faar ingen kvittering fortsat god dag.");
-     }
-   }
+        } else
+        {
+        System.out.println("du faar ingen kvittering fortsat god dag.");
+        }
+    }
 
 
     public static void refill()
