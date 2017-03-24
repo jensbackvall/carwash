@@ -1,3 +1,3 @@
-Saldo: 3680
+Saldo: 78200.0
 PIN: 123456
 Lukket: 0

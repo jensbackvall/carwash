@@ -20,6 +20,7 @@ public class carWash
 
     public static void main(String[] args)
     {
+        ReadPrice();
         login();
     }
 
@@ -28,7 +29,7 @@ public class carWash
        Scanner in = new Scanner (System.in);
 
        int antalFejl = 0;
-       int password;
+       int password = 0;
        boolean loop = false;
        boolean filIkkeFundet = true;
 
@@ -36,10 +37,21 @@ public class carWash
        while(loop == false)
        {
        filIkkeFundet = true;
+       
+       try 
+       { // Answer
        System.out.print("Brugernavn: ");
        brugernavn = in.nextInt();
        System.out.print("Postal Index Number: ");
        password = in.nextInt();
+       }
+       catch(InputMismatchException e)
+       {
+         System.out.println("Ugyldigt Brugernavn eller password.");
+         login();
+         return;
+       }
+      
 
           try
           {
@@ -86,8 +98,23 @@ public class carWash
                   {
                      System.out.println("Dit kort er nu lukket. Buhu");
                      loop = true;
-                     return;
-                     // Skriv til fil på linje 3 = 1. 1 betyder lukket - 0 betyder ikke lukket.
+                     oc = 1;
+                     
+                     try
+                       {
+                           PrintStream fuckYouStayOut = new PrintStream(new File("bruger"+ brugernavn + ".txt"));
+                           
+                           fuckYouStayOut.println("Saldo: " + saldo);
+                           fuckYouStayOut.println("PIN: " + PIN);
+                           fuckYouStayOut.println("Lukket: " + oc);
+                  
+                       }
+                       catch(FileNotFoundException e)
+                       {
+                       e.printStackTrace();
+                       }  
+                       
+                       return;                
                   }
 
                   if(antalFejl < 3)
@@ -105,7 +132,7 @@ public class carWash
        }
     }
     
-        public static void SeeStats()
+        public static void seeStats()
     {
         try
         {
@@ -120,6 +147,7 @@ public class carWash
         {
         e.printStackTrace();
         }
+        login();
     }
 
     public static void WriteStats(String s,String s2)
@@ -188,16 +216,8 @@ public class carWash
         String tempHour = thisHour.format(dateobj);
         day = thisDay.format(dateobj);
         hour = Integer.parseInt(tempHour);
-
-
-        // Create an instance of SimpleDateFormat used for formatting
-        // the string representation of date (month/day/year)
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-
-        // Get the date today using Calendar object.
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date today = Calendar.getInstance().getTime();
-        // Using DateFormat format method we can create a string
-        // representation of a date with the defined format.
         reportDate = df.format(today);
      }
 
@@ -304,6 +324,7 @@ public class carWash
                 writeBalance.println(userPin);
                 writeBalance.println(cardClosed);
                 writeBalance.close();
+                receipt(washChoice);
                 login();
             }
         }
@@ -319,19 +340,42 @@ public class carWash
 
         System.out.println("indtast nye priser paa economy");
         System.out.print("Pris: ");
-        economy = sc.nextDouble();
+        economy = sc.nextInt();
 
         System.out.println("indtast nye priser paa standard");
         System.out.print("Pris: ");
-        standard = sc.nextDouble();
+        standard = sc.nextInt();
 
         System.out.println("indtast nye priser paa deluxe");
         System.out.print("Pris: ");
-        deluxe = sc.nextDouble();
+        deluxe = sc.nextInt();
+     
+        System.out.println("Indtast ny rabat");
+        System.out.print("Rabat i %: ");
+        rabat = sc.nextInt();
+        
+        System.out.println("Ny pris på economy = " + economy + "kr");
+        System.out.println("Ny pris på standard = " + standard + "kr");
+        System.out.println("Ny pris på deluxe = " + deluxe + "kr");
+        System.out.println("Ny rabat = " + rabat + "%");
+        
+        try
+        {
+            PrintStream writePricesAndDiscount = new PrintStream(new File("admin.txt"));
+            
+            writePricesAndDiscount.println("economy: " + (int)economy);
+            writePricesAndDiscount.println("standard: " + (int)standard);
+            writePricesAndDiscount.println("deluxe: " + (int)deluxe);
+            writePricesAndDiscount.println("rabat: " + (int)rabat);
+            ReadPrice();
 
-        System.out.println("Ny pris på economy = " + economy);
-        System.out.println("Ny pris på standard = " + standard);
-        System.out.println("Ny pris på deluxe = " + deluxe);
+        }
+        catch(FileNotFoundException e)
+        {
+        e.printStackTrace();
+        }
+        
+        login();
     }
 
     public static void changeRabat()
@@ -358,23 +402,19 @@ public class carWash
                if (linjesplit[0].equals("economy:"))
                {
                   economy = Double.parseDouble(linjesplit[1]);
-                  return;
                }
                if (linjesplit[0].equals("standard:"))
                {
                   standard = Double.parseDouble(linjesplit[1]);
-                  return;
                }
                if (linjesplit[0].equals("deluxe:"))
                {
                   deluxe = Double.parseDouble(linjesplit[1]);
-                  return;
                }
                if (linjesplit[0].equals("rabat:"))
                {
                   Double rabatbeforecalc = Double.parseDouble(linjesplit[1]);
                   rabat = (100-rabatbeforecalc)/100;
-                  return;
                }
            }
        }
@@ -427,7 +467,7 @@ public class carWash
                     System.out.println("Din saldo er: " + saldo +" kr");
                     try {
                         System.out.println("FARVEL");
-                        Thread.sleep(3000);                 //1000 milliseconds is one second.
+                        Thread.sleep(3000);                 
                     } catch(InterruptedException ex) {
                         Thread.currentThread().interrupt();
                     }
@@ -461,11 +501,11 @@ public class carWash
         switch(choice)
         {
             case 1: optionNotAvailable = false;
-                    System.out.println("Indsæt aendre priser method");
+                    changePrices();
                     break;
 
             case 2: optionNotAvailable = false;
-                    System.out.println("Indsæt se statistik method");
+                    seeStats();
                     break;
 
             default: System.out.println("Din indtastning er invalid, prøv igen!");
@@ -497,12 +537,13 @@ public class carWash
         return;
         }
         System.out.println("Tast 1 for kvittering ellers tast 2.");
+        System.out.print("Valg: ");
         a = in.nextInt();
         if(a == 1)
         {
         System.out.println("Her faar du din kvittering fortsat god dag.");
-        System.out.println(" " + date);
-        System.out.println(" " + Pris);
+        System.out.println("Dato: " + date);
+        System.out.println("Pris: " + Pris);
         System.out.println("Dette er din tilbageværende saldo " + saldo);
         } else
         {
@@ -594,7 +635,6 @@ public class carWash
       }
     }
 
-
 }
 
-
+// I got 639 problems but a comment ain't one (.)(.)!!
