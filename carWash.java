@@ -104,6 +104,23 @@ public class carWash
           }
        }
     }
+    
+        public static void SeeStats()
+    {
+        try
+        {
+            Scanner input = new Scanner(new File("stats.txt"));
+            while (input.hasNextLine())
+            {
+                String linje = input.nextLine();
+                System.out.println(linje);
+            }
+        }
+        catch(FileNotFoundException e)
+        {
+        e.printStackTrace();
+        }
+    }
 
     public static void WriteStats(String s,String s2)
     {
