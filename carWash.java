@@ -16,6 +16,7 @@ public class carWash
     public static int hour = 0;
     public static int PIN;
     public static int oc;
+    public static String reportDate;
 
     public static void main(String[] args)
     {
@@ -166,10 +167,20 @@ public class carWash
         DateFormat thisDay = new SimpleDateFormat("E");
         DateFormat thisHour = new SimpleDateFormat("HH");
         Date dateobj = new Date();
-        DateFormat thisDate = new SimpleDateFormat("dd/MM/yy");
         String tempHour = thisHour.format(dateobj);
         day = thisDay.format(dateobj);
         hour = Integer.parseInt(tempHour);
+        
+        
+        // Create an instance of SimpleDateFormat used for formatting 
+        // the string representation of date (month/day/year)
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+        // Get the date today using Calendar object.
+        Date today = Calendar.getInstance().getTime();        
+        // Using DateFormat format method we can create a string 
+        // representation of a date with the defined format.
+        reportDate = df.format(today);
      }
 
     public static boolean discountCheck()
@@ -215,7 +226,7 @@ public class carWash
                 if(washChoice == 1)
                 {
                   getDayTimeDate();
-                    WriteStats("economy", thisDate);
+                    WriteStats("economy", reportDate+" "+"economy");
                     correctChoice = true;
                     if (discountCheck() == true)
                     {
