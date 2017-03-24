@@ -37,8 +37,8 @@ public class carWash
        while(loop == false)
        {
        filIkkeFundet = true;
-       
-       try 
+
+       try
        { // Answer
        System.out.print("Brugernavn: ");
        brugernavn = in.nextInt();
@@ -51,7 +51,7 @@ public class carWash
          login();
          return;
        }
-      
+
 
           try
           {
@@ -99,22 +99,22 @@ public class carWash
                      System.out.println("Dit kort er nu lukket. Buhu");
                      loop = true;
                      oc = 1;
-                     
+
                      try
                        {
                            PrintStream fuckYouStayOut = new PrintStream(new File("bruger"+ brugernavn + ".txt"));
-                           
+
                            fuckYouStayOut.println("Saldo: " + saldo);
                            fuckYouStayOut.println("PIN: " + PIN);
                            fuckYouStayOut.println("Lukket: " + oc);
-                  
+
                        }
                        catch(FileNotFoundException e)
                        {
                        e.printStackTrace();
-                       }  
-                       
-                       return;                
+                       }
+
+                       return;
                   }
 
                   if(antalFejl < 3)
@@ -131,7 +131,7 @@ public class carWash
           }
        }
     }
-    
+
         public static void seeStats()
     {
         try
@@ -349,20 +349,20 @@ public class carWash
         System.out.println("indtast nye priser paa deluxe");
         System.out.print("Pris: ");
         deluxe = sc.nextInt();
-     
+
         System.out.println("Indtast ny rabat");
         System.out.print("Rabat i %: ");
         rabat = sc.nextInt();
-        
+
         System.out.println("Ny pris på economy = " + economy + "kr");
         System.out.println("Ny pris på standard = " + standard + "kr");
         System.out.println("Ny pris på deluxe = " + deluxe + "kr");
         System.out.println("Ny rabat = " + rabat + "%");
-        
+
         try
         {
             PrintStream writePricesAndDiscount = new PrintStream(new File("admin.txt"));
-            
+
             writePricesAndDiscount.println("economy: " + (int)economy);
             writePricesAndDiscount.println("standard: " + (int)standard);
             writePricesAndDiscount.println("deluxe: " + (int)deluxe);
@@ -374,7 +374,7 @@ public class carWash
         {
         e.printStackTrace();
         }
-        
+
         login();
     }
 
@@ -467,7 +467,7 @@ public class carWash
                     System.out.println("Din saldo er: " + saldo +" kr");
                     try {
                         System.out.println("FARVEL");
-                        Thread.sleep(3000);                 
+                        Thread.sleep(3000);
                     } catch(InterruptedException ex) {
                         Thread.currentThread().interrupt();
                     }
@@ -534,6 +534,7 @@ public class carWash
         }else
         {
         System.out.println("Kære soede skat vil du ikke nok vælge en rigtig vask og prøve igen!");
+        login();
         return;
         }
         System.out.println("Tast 1 for kvittering ellers tast 2.");
@@ -625,7 +626,7 @@ public class carWash
       System.out.println("***Kvittering udskrives***");
       System.out.println("Du har indsat " + amount + " kr. på vaskekortet");
       System.out.println("Din nye saldo er " + total + " kr.");
-      System.out.println("Tryk ENTER for at logge ud - Go' dag!");
+      System.out.println("FARVEL!");
       login();
       return;
       }
