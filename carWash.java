@@ -67,7 +67,6 @@ public class carWash
                 System.out.println("Din konto er lukket - buhu");
                 login();
                 input.close();
-                in.close();
                 return;
               }
              input.close();
@@ -104,7 +103,6 @@ public class carWash
              }
           }
        }
-        in.close();
     }
 
     public static void WriteStats(String s,String s2)
@@ -121,7 +119,7 @@ public class carWash
                 {
                     if (s.equals("economy"))
                     {
-                        gamlelinjer.add(linjesplit[0]+" "+(linjesplit[1]+1));
+                        gamlelinjer.add(linjesplit[0]+" "+(Integer.parseInt(linjesplit[1])+1));
                     } else
                     {
                         gamlelinjer.add(linjesplit[0]+" "+linjesplit[1]);
@@ -130,7 +128,7 @@ public class carWash
                 {
                     if (s.equals("standard"))
                     {
-                        gamlelinjer.add(linjesplit[0]+" "+(linjesplit[1]+1));
+                        gamlelinjer.add(linjesplit[0]+" "+(Integer.parseInt(linjesplit[1])+1));
                     } else
                     {
                         gamlelinjer.add(linjesplit[0]+" "+linjesplit[1]);
@@ -139,14 +137,17 @@ public class carWash
                 {
                     if (s.equals("deluxe"))
                     {
-                        gamlelinjer.add(linjesplit[0]+" "+(linjesplit[1]+1));
+                        gamlelinjer.add(linjesplit[0]+" "+(Integer.parseInt(linjesplit[1])+1));
                     }else
                     {
                         gamlelinjer.add(linjesplit[0]+" "+linjesplit[1]);
                     }
                 } else if (linjesplit[0].equals("antalvaske:"))
                 {
-                    gamlelinjer.add(linjesplit[0]+" "+(linjesplit[1]+1));
+                    gamlelinjer.add(linjesplit[0]+" "+(Integer.parseInt(linjesplit[1])+1));
+                } else
+                {
+                    gamlelinjer.add(linje);
                 }
             }
             PrintStream writeStats = new PrintStream(new File("stats.txt"));
@@ -170,15 +171,15 @@ public class carWash
         String tempHour = thisHour.format(dateobj);
         day = thisDay.format(dateobj);
         hour = Integer.parseInt(tempHour);
-        
-        
-        // Create an instance of SimpleDateFormat used for formatting 
+
+
+        // Create an instance of SimpleDateFormat used for formatting
         // the string representation of date (month/day/year)
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
         // Get the date today using Calendar object.
-        Date today = Calendar.getInstance().getTime();        
-        // Using DateFormat format method we can create a string 
+        Date today = Calendar.getInstance().getTime();
+        // Using DateFormat format method we can create a string
         // representation of a date with the defined format.
         reportDate = df.format(today);
      }
@@ -192,7 +193,7 @@ public class carWash
             } else if (day == "Sat") {
                 System.out.println("Ingen rabat om lørdagen!");
                 return false;
-            } else if (hour < 14) {
+            } else if (!day.equals("Sun") && !day.equals("Sat") && hour < 14) {
                 System.out.println("Hvor er du heldig!!! Du får 20% rabat");
                 return true;
             }
@@ -219,51 +220,73 @@ public class carWash
             PrintStream writeBalance = new PrintStream(new File("bruger" + user + ".txt"));
             double userBalance = Double.parseDouble(ub);
             boolean correctChoice = false;
-            console.close();
             userFile.close();
+            getDayTimeDate();
             while(correctChoice == false)
             {
                 if(washChoice == 1)
                 {
-                  getDayTimeDate();
-                    WriteStats("economy", reportDate+" "+"economy");
                     correctChoice = true;
-                    if (discountCheck() == true)
+                    if (discountCheck() == true && userBalance >= (economy*rabat))
                     {
+                        WriteStats("economy", reportDate+" "+"economy");
                         saldo = (int)userBalance - (economy * rabat);
                         System.out.println("Du har valgt og betalt for en Economy vask med Early Bird rabat " + (economy * rabat) + " kr. bliver trukket fra dit kort.");
-                    } else
-                    {
+                    }
+
+                    else if(userBalance >= economy) {
+                        WriteStats("economy", reportDate+" "+"Early Bird economy");
                         saldo = (int)userBalance - (economy);
                         System.out.println("Du har valgt og betalt for en Economy vask " + economy + " kr. bliver trukket fra dit kort.");
+                    }
+                    else
+                    {
+                      System.out.println("Du har ikke nok penge på kortet!");
                     }
                 } else if(washChoice == 2)
                 {
                     correctChoice = true;
-                    if (discountCheck() == true)
+                    if (discountCheck() == true && userBalance >=(standard*rabat))
                     {
+                        WriteStats("standard", reportDate+" "+"standard");
                         saldo = (int)userBalance - (standard * rabat);
                         System.out.println("Du har valgt og betalt for en Standard vask med Early Bird rabat " + (standard * rabat) + " kr. bliver trukket fra dit kort.");
-                    } else
+                    } else if(userBalance >= standard)
                     {
+                        WriteStats("standard", reportDate+" "+"Early Bird standard");
                         saldo = (int)userBalance - standard;
                         System.out.println("Du har valgt og betalt for en Standard vask " + standard + " kr. bliver trukket fra dit kort.");
                     }
+                    else
+                    {
+                      System.out.println("Du har ikke nok penge på kortet!");
+                    }
+
                 } else if(washChoice == 3)
                 {
+                    if (userBalance >= deluxe)
+                    {
+                    WriteStats("deluxe", reportDate+" "+"deluxe");
                     correctChoice = true;
                     saldo = (int)userBalance - deluxe;
                     System.out.println("Du har valgt og betalt for en DeLuxe vask " + deluxe + " kr. bliver trukket fra dit kort.");
-                } else
+                    }
+
+                    else
+                    {
+                    System.out.println("Du har ikke nok penge på kortet!");
+                    }
+                }
+                else
                 {
                     System.out.println("Du har ikke valgt en gyldig vask \nTast venligst 1, 2 eller 3!");
                     washChoice = console.nextInt();
                 }
+
                 writeBalance.println("Saldo: " + (int)saldo);
                 writeBalance.println(userPin);
                 writeBalance.println(cardClosed);
                 writeBalance.close();
-                receipt(5);
                 login();
             }
         }
@@ -524,7 +547,6 @@ public class carWash
       }
 
       if (godkendFortrydKøb == 2){
-      //console.close();
       login();
       return;
       }
@@ -546,12 +568,10 @@ public class carWash
       System.out.println("Du har indsat " + amount + " kr. på vaskekortet");
       System.out.println("Din nye saldo er " + total + " kr.");
       System.out.println("Tryk ENTER for at logge ud - Go' dag!");
-      //console.close();
       login();
       return;
       }
       else{
-      // console.close();
       login();
       return;
       }

@@ -1,4 +1,10 @@
-antalvaske: 0
-economy: 0
-standard: 0
+antalvaske: 426
+economy: 74
+standard: 1338
 deluxe: 0
+03/24/2017 10:32:15 Early Bird economy
+03/24/2017 10:33:55 economy
+03/24/2017 10:35:50 Early Bird economy
+03/24/2017 10:36:32 Early Bird economy
+03/24/2017 10:37:00 Early Bird standard
+03/24/2017 10:38:41 economy
