@@ -17,7 +17,6 @@ public class carWash
     public static int PIN;
     public static int oc;
 
-
     public static void main(String[] args)
     {
         login();
@@ -106,13 +105,13 @@ public class carWash
        }
         in.close();
     }
-    
+
     public static void WriteStats(String s,String s2)
     {
       ArrayList<String> gamlelinjer = new ArrayList<String>();
        try {
        Scanner input = new Scanner(new File("stats.txt"));
-       while (input.hasNextLine()) 
+       while (input.hasNextLine())
            {
                String linje = input.nextLine();
                String[] linjesplit = linje.split(" ");
@@ -154,6 +153,7 @@ public class carWash
         DateFormat thisDay = new SimpleDateFormat("E");
         DateFormat thisHour = new SimpleDateFormat("HH");
         Date dateobj = new Date();
+        DateFormat thisDate = new SimpleDateFormat("dd/MM/yy");
         String tempHour = thisHour.format(dateobj);
         day = thisDay.format(dateobj);
         hour = Integer.parseInt(tempHour);
@@ -198,6 +198,8 @@ public class carWash
             userFile.close();
             while(correctChoice == false) {
                 if(washChoice == 1) {
+                  getDayTimeDate();
+                    WriteStats("economy", thisDate);
                     correctChoice = true;
                     if (discountCheck() == true) {
                         saldo = (int)userBalance - (economy * rabat);
