@@ -11,12 +11,14 @@ public class carWash
     public static double deluxe = 1000;
     public static double rabat = 0.8;
     public static double saldo = 0;
-    public static int brugernavn = 2;
+    public static double totalpris = 0;
+    public static String reportDate;
     public static String day = "";
+    public static int brugernavn = 2;
     public static int hour = 0;
     public static int PIN;
     public static int oc;
-    public static String reportDate;
+
 
     public static void main(String[] args)
     {
@@ -268,12 +270,14 @@ public class carWash
                     {
                         WriteStats("economy", reportDate+" "+"economy");
                         saldo = (int)userBalance - (economy * rabat);
+                        totalpris = (economy * rabat);
                         System.out.println("Du har valgt og betalt for en Economy vask med Early Bird rabat " + (economy * rabat) + " kr. bliver trukket fra dit kort.");
                     }
 
                     else if(userBalance >= economy) {
                         WriteStats("economy", reportDate+" "+"Early Bird economy");
                         saldo = (int)userBalance - (economy);
+                        totalpris = economy;
                         System.out.println("Du har valgt og betalt for en Economy vask " + economy + " kr. bliver trukket fra dit kort.");
                     }
                     else
@@ -287,11 +291,13 @@ public class carWash
                     {
                         WriteStats("standard", reportDate+" "+"standard");
                         saldo = (int)userBalance - (standard * rabat);
+                        totalpris = (standard * rabat);
                         System.out.println("Du har valgt og betalt for en Standard vask med Early Bird rabat " + (standard * rabat) + " kr. bliver trukket fra dit kort.");
                     } else if(userBalance >= standard)
                     {
                         WriteStats("standard", reportDate+" "+"Early Bird standard");
                         saldo = (int)userBalance - standard;
+                        totalpris = standard;
                         System.out.println("Du har valgt og betalt for en Standard vask " + standard + " kr. bliver trukket fra dit kort.");
                     }
                     else
@@ -306,6 +312,7 @@ public class carWash
                     WriteStats("deluxe", reportDate+" "+"deluxe");
                     correctChoice = true;
                     saldo = (int)userBalance - deluxe;
+                    totalpris = deluxe;
                     System.out.println("Du har valgt og betalt for en DeLuxe vask " + deluxe + " kr. bliver trukket fra dit kort.");
                     }
 
@@ -544,7 +551,7 @@ public class carWash
         {
         System.out.println("Her faar du din kvittering fortsat god dag.");
         System.out.println("Dato: " + date);
-        System.out.println("Pris: " + Pris);
+        System.out.println("Pris: " + totalpris);
         System.out.println("Dette er din tilbageværende saldo " + saldo);
         } else
         {
